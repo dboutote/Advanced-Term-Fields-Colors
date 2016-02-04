@@ -9,7 +9,7 @@
  *
  * Plugin Name: Advanced Term Fields: Colors
  * Plugin URI:  http://darrinb.com/plugins/advanced-term-fields-colors
- * Description: Assign colors for categories, tags, and custom taxonomy terms.
+ * Description: Easily assign colors for categories, tags, and custom taxonomy terms.
  * Version:     0.1.0
  * Author:      Darrin Boutote
  * Author URI:  http://darrinb.com
