@@ -119,9 +119,9 @@ final class Adv_Term_Fields_Colors extends Advanced_Term_Fields
 	public function set_labels()
 	{
 		$this->labels = array(
-			'singular'    => esc_html__( 'Color',  'adv-term-fields-colors' ),
-			'plural'      => esc_html__( 'Colors', 'adv-term-fields-colors' ),
-			'description' => esc_html__( 'Select a color to represent this term.', 'adv-term-fields-colors' )
+			'singular'    => esc_html__( 'Color',  'atf-colors' ),
+			'plural'      => esc_html__( 'Colors', 'atf-colors' ),
+			'description' => esc_html__( 'Select a color to represent this term.', 'atf-colors' )
 		);
 	}
 
