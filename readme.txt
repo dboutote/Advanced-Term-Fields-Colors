@@ -1,19 +1,25 @@
-=== WP Bootstrap Comments ===
+=== Advanced Term Fields: Colors ===
 Contributors: dbmartin
-Tags: comments, bootstrap
-Requires at least: 2.7
+Tags: termmeta, term_meta, term, meta, metadata, taxonomy, colors
+Requires at least: 4.4
 Tested up to: 4.4.1
 Stable tag: 0.1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Nested Bootstrap (v3) comments for WordPress.
+Easily assign colors for categories, tags, and custom taxonomy terms.
 
 == Description ==
 
-A comment Walker class that creates native WordPress comment lists using Bootstrap Media Object markup/classes. See: http://getbootstrap.com/components/#media
+Advanced Term Fields: Colors extends the Advanced Term Fields framework to give users the ability to easily add and manage colors for any category, tag, or custom taxonomy.
 
-For support and official documentation see the plugin's home page here: http://darrinb.com/plugins/wp-bootstrap-comments
+Easily sort and manage your color-coded terms!
+
+
+= Usage =
+
+This is an extension of the Advanced Term Fields framework.  To use, the Advanced Term Fields framework must be installed on your project.  You can find the framework here: [Advanced Term Fields](https://github.com/dboutote/Advanced-Term-Fields)
+
 
 == Installation ==
 
@@ -25,52 +31,26 @@ For support and official documentation see the plugin's home page here: http://d
 
 = From GitHub: =
 
-* Download the [latest stable version] (https://github.com/dboutote/WP-Bootstrap-Comments/archive/master.zip).
+* Download the [latest stable version](https://github.com/dboutote/Advanced-Term-Fields-Colors/archive/master.zip).
 * Extract the zip folder to your plugins directory.
 * Activate in the "Plugins" area of your admin by clicking the "Activate" link.
 * No further setup or configuration is necessary.
 
 
-== Usage ==
-
-Add a call to the `WP_Bootstrap_Comments_Walker()` class in `wp_list_comments()` in your `comments.php` template.
-
-`
-<?php
-   wp_list_comments( array(
-      'style'       => 'div',
-      'short_ping'  => true,
-      'avatar_size' => 42,
-      'walker' => new WP_Bootstrap_Comments_Walker(),
-   ) );
-?>
-`
-
-To use Bootstrap's native media list styling change `<ol class="comment-list">` to `<ul class="media-list">`.
-
-`
-<ul class="media-list">
-    <?php
-        wp_list_comments( array(
-            'style'       => 'ul',
-            'short_ping'  => true,
-            'avatar_size' => 42,
-            'walker' => new WP_Bootstrap_Comments_Walker(),
-        ) );
-    ?>
-</ul><!-- .media-list -->
-`
-
-
 == Frequently Asked Questions ==
-
-= Where can I get support? =
-
-The plugin's official page: http://darrinb.com/plugins/wp-bootstrap-comments
 
 = Where can I find documentation? =
 
-http://darrinb.com/plugins/wp-bootstrap-comments
+The plugin's official page: http://darrinb.com/plugins/advanced-term-fields-colors
+
+= Does this plugin depend on any others? =
+
+Nope!
+
+= Does this create/modify/destroy database tables? =
+
+This leverages the term meta capabilities added in WordPress 4.4.  No database modifications needed!
+
 
 == Changelog ==
 
