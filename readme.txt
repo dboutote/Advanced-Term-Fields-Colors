@@ -7,7 +7,7 @@ Stable tag: 0.1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Easily assign colors for categories, tags, and custom taxonomy terms.
+Easily assign colors for categories, tags, and custom taxonomy terms. Term meta, color coded!
 
 == Description ==
 
@@ -57,6 +57,14 @@ It can be found here:
 = Does this create/modify/destroy database tables? =
 
 This leverages the term meta capabilities added in WordPress 4.4.  No database modifications needed!
+
+== Screenshots ==
+
+1. Custom column to the Tag List Table.
+2. Select your color using the native WordPress color picker.
+3. Accessible from the Quick Edit form
+4. Color picker on the Edit Tag screen.
+
 
 == Changelog ==
 
