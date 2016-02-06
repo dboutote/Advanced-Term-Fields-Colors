@@ -1,6 +1,6 @@
 # Advanced Term Fields: Colors
 
-Easily assign colors for categories, tags, and custom taxonomy terms.
+Easily assign colors for categories, tags, and custom taxonomy terms. Term meta, color coded!
 
 Advanced Term Fields: Colors extends the Advanced Term Fields framework to give users the ability to easily add and manage colors for any category, tag, or custom taxonomy.
 
@@ -36,7 +36,7 @@ You can find the framework here:
 
 ### Where can I find additional additional documentation?
 
-The plugin's official page: http://darrinb.com/plugins/advanced-term-fields-colors
+The plugin's official page: http://darrinb.com/advanced-term-fields-colors
 
 ### Does this plugin depend on any others?
 

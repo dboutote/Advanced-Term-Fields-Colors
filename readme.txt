@@ -20,7 +20,7 @@ Easily sort and manage your color-coded terms!
 
 This is an extension of the Advanced Term Fields framework.  To use, the Advanced Term Fields plugin must be installed on your project.
 
-You can find the plugin here:
+You can find the framework here:
 
 * On WP: [Advanced Term Fields](https://wordpress.org/plugins/advanced-term-fields/)
 * On GitHub: [Advanced Term Fields](https://github.com/dboutote/Advanced-Term-Fields)
@@ -45,7 +45,7 @@ You can find the plugin here:
 
 = Where can I find documentation? =
 
-The plugin's official page: http://darrinb.com/plugins/advanced-term-fields-colors
+The plugin's official page: http://darrinb.com/advanced-term-fields-colors
 
 = Does this plugin depend on any others? =
 
