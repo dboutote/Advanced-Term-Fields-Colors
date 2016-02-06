@@ -6,7 +6,7 @@ Advanced Term Fields: Colors extends the Advanced Term Fields framework to give 
 
 Easily sort and manage your color-coded terms!
 
-![term admin](assets/screenshot.png?raw=true "Color-coded Terms!")
+![term admin](assets/screenshot-1.png?raw=true "Color-coded Terms!")
 
 # Installation
 
