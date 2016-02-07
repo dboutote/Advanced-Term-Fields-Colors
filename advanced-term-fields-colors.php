@@ -5,12 +5,12 @@
  * @package Advanced_Term_Fields_Colors
  *
  * @license     http://www.gnu.org/licenses/gpl-2.0.txt GPL-2.0+
- * @version     0.1.0
+ * @version     0.1.1
  *
  * Plugin Name: Advanced Term Fields: Colors
  * Plugin URI:  http://darrinb.com/plugins/advanced-term-fields-colors
  * Description: Easily assign colors for categories, tags, and custom taxonomy terms.
- * Version:     0.1.0
+ * Version:     0.1.1
  * Author:      Darrin Boutote
  * Author URI:  http://darrinb.com
  * Text Domain: atf-colors
