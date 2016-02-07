@@ -70,5 +70,8 @@ This leverages the term meta capabilities added in WordPress 4.4.  No database m
 
 == Changelog ==
 
+= 0.1.1 =
+* Added function to clear color picker on ajax form submit when adding tags.
+
 = 0.1.0 =
 * Initial release
