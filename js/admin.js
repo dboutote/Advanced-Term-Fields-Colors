@@ -14,7 +14,6 @@
 	function atfResetTagFormColors( form ) {
 		$('.wp-color-result', form).css({'background-color': 'transparent'});
 		$( '#' + l10n_ATF_colors.meta_key, form ).val('');
-		console.log( 'cleared color' );
 	};
 
 
