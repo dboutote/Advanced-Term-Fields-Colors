@@ -2,6 +2,21 @@
 
 ( function ($) {
 	'use strict';
+	
+    /**
+     * Globals
+     */
+	var atf_tag_form = $('#addtag');
+
+	/**
+	 * Resets the color field
+	 */
+	function atfResetTagFormColors( form ) {
+		$('.wp-color-result', form).css({'background-color': 'transparent'});
+		$( '#' + l10n_ATF_colors.meta_key, form ).val('');
+		console.log( 'cleared color' );
+	};
+
 
 	/**
 	 * Instantiate the color picker
@@ -23,33 +38,35 @@
 
 
 	/**
-	 * Resets the color field
+	 * Resets the color picker fields
+	 *
+	 * Checks if the form has been submitted and if there's no ajax error message.
 	 */
-	function ATFResetTagFormColors() {
-		var form = $('#addtag'),
-			term_name_val = $('#tag-name', form).val(),
-			term_slug_val = $('#tag-slug', form).val();
-
-		if( '' === term_name_val && '' === term_slug_val){
-			$('.wp-color-result', form).css({'background-color': 'transparent'});
-			$( '#' + l10n_ATF_colors.meta_key, form ).val('');
-		}
-	};
-
-
+	$( '#tag-name', atf_tag_form ).on('blur', function(){
+		var form = $(this).parents('form');
+		if( form.hasClass('atf-submitted') &&  $('#ajax-response').html() == '' ) {
+			atfResetTagFormColors( form );
+		}		
+	});
+	
+	
 	/**
 	 * Reset the color field after the form has been submitted
 	 *
-	 * Note: this fires before wp-admin\js\tags.js hence the setTimeout
+	 * Note: There is no easy way to check if the form has successfully submitted, since it's ajax-
+	 * posted, no change events are fired on any form fields.
+	 *
+	 * @since 0.1.1
 	 */
-	$( '#submit', '#addtag').click( function(){
+	$( '#submit', atf_tag_form).click( function(){
 		var form = $(this).parents('form');
-
+		
 		if ( ! validateForm( form ) ) {
+			form.removeClass('atf-submitted');
 			return false;
 		} else {
-			setTimeout( ATFResetTagFormColors, 1000 );
+			form.addClass('atf-submitted');
 		}
-	});
+	});	
 
 })(jQuery);
