@@ -5,7 +5,7 @@
  * @package Advanced_Term_Fields_Colors
  *
  * @license     http://www.gnu.org/licenses/gpl-2.0.txt GPL-2.0+
- * @version     0.1.1
+ * @version     0.1.0
  *
  * Plugin Name: Advanced Term Fields: Colors
  * Plugin URI:  http://darrinb.com/plugins/advanced-term-fields-colors
@@ -84,7 +84,7 @@ function _atf_colors_plugin_admin_notice() {
 
 
 /**
- * Instantiate the main Advanced Term Fields: Colors class
+ * Instantiates the main Advanced Term Fields: Colors class
  *
  * @since 0.1.0
  */

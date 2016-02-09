@@ -28,7 +28,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @since 0.1.0
  *
  */
-final class Adv_Term_Fields_Colors extends Advanced_Term_Fields
+class Adv_Term_Fields_Colors extends Advanced_Term_Fields
 {
 
 	/**
@@ -38,7 +38,7 @@ final class Adv_Term_Fields_Colors extends Advanced_Term_Fields
 	 *
 	 * @var string
 	 */
-	public $version = '0.1.0';
+	protected static $version = 'Colors0.1.0';
 
 
 	/**
@@ -50,15 +50,34 @@ final class Adv_Term_Fields_Colors extends Advanced_Term_Fields
 	 *
 	 * @var string
 	 */
-	public $meta_key = 'term_color';
+	public $meta_key = '_term_color';
 
 
 	/**
-	 * Unique singular slug for meta type
+	 * Singular slug for meta key
 	 *
+	 * Used for:
+	 * - localizing js files
+	 * - form field views
+	 *
+	 * @see Adv_Term_Fields_Icons::enqueue_admin_scripts()
+	 * @see Adv_Term_Fields_Icons\Views\(add|edit|qedit).php
+	 *
+	 * @since 0.1.0
+	 *
+	 * @var string
+	 */
+	public $meta_slug = 'term-color';
+
+
+	/**
+	 * Unique singular descriptor for meta type
+	 *
+	 * (e.g.) "icon", "color", "thumbnail", "image", "lock".
+	 * 
 	 * Used in localizing js files.
 	 *
-	 * @see Adv_Term_Fields_Colors::enqueue_admin_scripts()
+	 * @see Adv_Term_Fields_Icons::enqueue_admin_scripts()
 	 *
 	 * @since 0.1.0
 	 *
@@ -151,14 +170,15 @@ final class Adv_Term_Fields_Colors extends Advanced_Term_Fields
 
 		wp_localize_script( 'atf-colors', 'l10n_ATF_colors', array(
 			'custom_column_name' => esc_html__( $this->custom_column_name ),
-			'meta_key'           => esc_html__( $this->meta_key ),
-			'data_type'          => esc_html__( $this->data_type ),
+			'meta_key'	         => esc_html__( $this->meta_key ),
+			'meta_slug'	         => esc_html__( $this->meta_slug ),
+			'data_type'	         => esc_html__( $this->data_type ),
 		) );
 	}
 
 
 	/**
-	 * Prints out css styles in admin head
+	 * Prints out CSS styles in admin head
 	 *
 	 * Note: Only loads on edit-tags.php
 	 *
@@ -195,8 +215,7 @@ final class Adv_Term_Fields_Colors extends Advanced_Term_Fields
 	public function custom_column_output( $meta_value )
 	{
 		$output = sprintf(
-			'<svg data-%1$s="%2$s" class="term-%1$s" width="25" height="25"> <title>%2$s</title> <circle cx="12" cy="12" r="12" fill="%2$s" /> %2$s </svg>',
-			$this->data_type,
+			'<i data-color="%1$s" class="term-color" title="%1$s" style="background-color:%1$s" />',
 			esc_attr( $meta_value )
 			);
 
@@ -212,6 +231,7 @@ final class Adv_Term_Fields_Colors extends Advanced_Term_Fields
 	 *
 	 * @uses Advanced_Term_Fields::$file To include view.
 	 * @uses Advanced_Term_Fields::$meta_key To populate field attributes.
+	 * @uses Advanced_Term_Fields::$meta_slug To populate CSS IDs, classes.
 	 *
 	 * @access public
 	 *
@@ -224,7 +244,7 @@ final class Adv_Term_Fields_Colors extends Advanced_Term_Fields
 	public function show_inner_field_add( $taxonomy = '' )
 	{
 		ob_start();
-		include dirname( $this->file ) . '/views/add-form-field.php';
+		include dirname( $this->file ) . '/views/inner-add-form-field.php';
 		$field = ob_get_contents();
 		ob_end_clean();
 
@@ -241,6 +261,7 @@ final class Adv_Term_Fields_Colors extends Advanced_Term_Fields
 	 * @uses Advanced_Term_Fields::$file To include view.
 	 * @uses Advanced_Term_Fields::$meta_key To populate field attributes.
 	 * @uses Advanced_Term_Fields::get_meta() To retrieve meta value.
+	 * @uses Advanced_Term_Fields::$meta_slug To populate CSS IDs, classes.
 	 *
 	 * @access public
 	 *
@@ -254,7 +275,7 @@ final class Adv_Term_Fields_Colors extends Advanced_Term_Fields
 	public function show_inner_field_edit( $term = false, $taxonomy = '' )
 	{
 		ob_start();
-		include dirname( $this->file ) . '/views/edit-form-field.php';
+		include dirname( $this->file ) . '/views/inner-edit-form-field.php';
 		$field = ob_get_contents();
 		ob_end_clean();
 
@@ -270,6 +291,7 @@ final class Adv_Term_Fields_Colors extends Advanced_Term_Fields
 	 *
 	 * @uses Advanced_Term_Fields::$file To include view.
 	 * @uses Advanced_Term_Fields::$meta_key To populate field attributes.
+	 * @uses Advanced_Term_Fields::$meta_slug To populate CSS IDs, classes.
 	 *
 	 * @access public
 	 *
@@ -284,7 +306,7 @@ final class Adv_Term_Fields_Colors extends Advanced_Term_Fields
 	public function show_inner_field_qedit( $column_name = '' , $screen = '' , $taxonomy = '' )
 	{
 		ob_start();
-		include dirname( $this->file ) . '/views/quick-form-field.php';
+		include dirname( $this->file ) . '/views/inner-quick-form-field.php';
 		$field = ob_get_contents();
 		ob_end_clean();
 
@@ -293,11 +315,13 @@ final class Adv_Term_Fields_Colors extends Advanced_Term_Fields
 
 
 	/**
-	 * Make sure we have valid hex color
+	 * Validates submitted meta value
+	 *
+	 * Makes sure it's a valid hex color code.
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param string $data The expected hex color code
+	 * @param string $data The expected hex color code.
 	 *
 	 * @return string $data The sanitized meta value.
 	 */
@@ -312,11 +336,11 @@ final class Adv_Term_Fields_Colors extends Advanced_Term_Fields
 	 *
 	 * @since 0.1.0
 	 *
-	 * @see WP_Term_Toolbox::sortable_columns()
+	 * @see Advanced_Term_Fields::sortable_columns()
 	 *
 	 * @param array $columns The columns of the Tag List table
 	 */
-	public function sortable_columns2( $columns = array() )
+	public function sortable_columns( $columns = array() )
 	{
 		return $columns;
 	}
