@@ -8,7 +8,7 @@ Easily sort and manage your color-coded terms!
 
 ![term admin](assets/screenshot-1.png?raw=true "Color-coded Terms!")
 
-# Usage
+## Usage
 
 This is an extension of the **Advanced Term Fields** framework.  To use, the Advanced Term Fields plugin must be installed on your project.
 
@@ -17,7 +17,7 @@ You can find the plugin here:
 * On WP: [Advanced Term Fields](https://wordpress.org/plugins/advanced-term-fields/)
 * On GitHub: [Advanced Term Fields](https://github.com/dboutote/Advanced-Term-Fields)
 
-# Installation
+## Installation
 
 ### From the WordPress.org plugin repository:
 
@@ -32,7 +32,7 @@ You can find the plugin here:
 * Activate in the "Plugins" area of your admin by clicking the "Activate" link.
 * No further setup or configuration is necessary.
 
-# FAQ
+## FAQ
 
 ### Where can I find additional additional documentation?
 
@@ -40,9 +40,9 @@ The plugin's official page: http://darrinb.com/advanced-term-fields-colors
 
 ### Does this plugin depend on any others?
 
-Yes, this plugin is an extension of the Advanced Term Fields framework.  You'll need to install that plugin to handle all base functionality.
+Yes, this plugin is an extension of the **Advanced Term Fields** framework.  You'll need to install that plugin to handle all base functionality.
 
-It can be found here:
+You can find the plugin here:
 
 * On WP: [Advanced Term Fields](https://wordpress.org/plugins/advanced-term-fields/)
 * On GitHub: [Advanced Term Fields](https://github.com/dboutote/Advanced-Term-Fields)
