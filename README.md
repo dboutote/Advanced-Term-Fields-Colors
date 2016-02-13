@@ -2,17 +2,26 @@
 
 Easily assign colors for categories, tags, and custom taxonomy terms. Term meta, color coded!
 
-Advanced Term Fields: Colors extends the Advanced Term Fields framework to give users the ability to easily add and manage colors for any category, tag, or custom taxonomy.
+**Advanced Term Fields: Colors** extends the Advanced Term Fields framework to give users the ability to easily add and manage colors for any category, tag, or custom taxonomy.
 
 Easily sort and manage your color-coded terms!
 
 ![term admin](assets/screenshot-1.png?raw=true "Color-coded Terms!")
 
+# Usage
+
+This is an extension of the **Advanced Term Fields** framework.  To use, the Advanced Term Fields plugin must be installed on your project.
+
+You can find the plugin here:
+
+* On WP: [Advanced Term Fields](https://wordpress.org/plugins/advanced-term-fields/)
+* On GitHub: [Advanced Term Fields](https://github.com/dboutote/Advanced-Term-Fields)
+
 # Installation
 
 ### From the WordPress.org plugin repository:
 
-* Download and install using the built in WordPress plugin installer.
+* [Download](https://wordpress.org/plugins/advanced-term-fields-colors/) and install using the built in WordPress plugin installer.
 * Activate in the "Plugins" area of your admin by clicking the "Activate" link.
 * No further setup or configuration is necessary.
 
@@ -22,15 +31,6 @@ Easily sort and manage your color-coded terms!
 * Extract the zip folder to your plugins directory.
 * Activate in the "Plugins" area of your admin by clicking the "Activate" link.
 * No further setup or configuration is necessary.
-
-# Usage
-
-This is an extension of the Advanced Term Fields framework.  To use, the Advanced Term Fields plugin must be installed on your project.
-
-You can find the framework here:
-
-* On WP: [Advanced Term Fields](https://wordpress.org/plugins/advanced-term-fields/)
-* On GitHub: [Advanced Term Fields](https://github.com/dboutote/Advanced-Term-Fields)
 
 # FAQ
 
