@@ -19,13 +19,13 @@ You can find the plugin here:
 
 ## Installation
 
-### From the WordPress.org plugin repository:
+#### From the WordPress.org plugin repository:
 
 * [Download](https://wordpress.org/plugins/advanced-term-fields-colors/) and install using the built in WordPress plugin installer.
 * Activate in the "Plugins" area of your admin by clicking the "Activate" link.
 * No further setup or configuration is necessary.
 
-### From GitHub:
+#### From GitHub:
 
 * Download the [latest stable version](https://github.com/dboutote/Advanced-Term-Fields-Colors/archive/master.zip).
 * Extract the zip folder to your plugins directory.
@@ -34,11 +34,11 @@ You can find the plugin here:
 
 ## FAQ
 
-### Where can I find additional additional documentation?
+#### Where can I find additional additional documentation?
 
 The plugin's official page: http://darrinb.com/advanced-term-fields-colors
 
-### Does this plugin depend on any others?
+#### Does this plugin depend on any others?
 
 Yes, this plugin is an extension of the **Advanced Term Fields** framework.  You'll need to install that plugin to handle all base functionality.
 
@@ -47,6 +47,6 @@ You can find the plugin here:
 * On WP: [Advanced Term Fields](https://wordpress.org/plugins/advanced-term-fields/)
 * On GitHub: [Advanced Term Fields](https://github.com/dboutote/Advanced-Term-Fields)
 
-### Does this create/modify/destroy database tables?
+#### Does this create/modify/destroy database tables?
 
 This leverages the term meta capabilities added in WordPress 4.4.  No database modifications needed!
