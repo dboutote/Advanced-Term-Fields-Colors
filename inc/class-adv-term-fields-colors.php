@@ -23,12 +23,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Adds colors for taxonomy terms
  *
- * @version 1.0.0
+ * @version 0.1.1 Added upgrade check. Changed $meta_key to protected. Added @var $meta_slug.
+ * @version 0.1.0
  *
  * @since 0.1.0
  *
  */
-final class Adv_Term_Fields_Colors extends Advanced_Term_Fields
+class Adv_Term_Fields_Colors extends Advanced_Term_Fields
 {
 
 	/**
@@ -38,7 +39,7 @@ final class Adv_Term_Fields_Colors extends Advanced_Term_Fields
 	 *
 	 * @var string
 	 */
-	public $version = '0.1.0';
+	protected $version = ATF_COLORS_VERSION;
 
 
 	/**
@@ -50,11 +51,30 @@ final class Adv_Term_Fields_Colors extends Advanced_Term_Fields
 	 *
 	 * @var string
 	 */
-	public $meta_key = 'term_color';
+	public $meta_key = '_term_color';
 
 
 	/**
-	 * Unique singular slug for meta type
+	 * Singular slug for meta key
+	 *
+	 * Used for:
+	 * - localizing js files
+	 * - form field views
+	 *
+	 * @see Adv_Term_Fields_Colors::enqueue_admin_scripts()
+	 * @see Adv_Term_Fields_Colors\Views\(add|edit|qedit).php
+	 *
+	 * @since 0.1.0
+	 *
+	 * @var string
+	 */
+	public $meta_slug = 'term-color';
+
+
+	/**
+	 * Unique singular descriptor for meta type
+	 *
+	 * (e.g.) "icon", "color", "thumbnail", "image", "lock".
 	 *
 	 * Used in localizing js files.
 	 *
@@ -88,10 +108,11 @@ final class Adv_Term_Fields_Colors extends Advanced_Term_Fields
 	 * @uses Advanced_Term_Fields::show_custom_column()
 	 * @uses Advanced_Term_Fields::show_custom_fields()
 	 * @uses Advanced_Term_Fields::register_meta()
-	 * @uses Advanced_Term_Fields::load_admin_functions()
 	 * @uses Advanced_Term_Fields::process_term_meta()
 	 * @uses Advanced_Term_Fields::filter_terms_query()
 	 * @uses Advanced_Term_Fields::$allowed_taxonomies
+	 * @uses Adv_Term_Fields_Colors::load_admin_functions()
+	 * @uses Adv_Term_Fields_Colors::show_inner_fields()
 	 *
 	 * @access public
 	 *
@@ -99,13 +120,91 @@ final class Adv_Term_Fields_Colors extends Advanced_Term_Fields
 	 */
 	public function init()
 	{
-		$this->show_custom_column( $this->allowed_taxonomies );
-		$this->show_custom_fields( $this->allowed_taxonomies );
 		$this->register_meta();
 		$this->load_admin_functions();
+		$this->show_custom_column( $this->allowed_taxonomies );
+		$this->show_custom_fields( $this->allowed_taxonomies );
 		$this->process_term_meta();
 		$this->filter_terms_query();
 		$this->show_inner_fields();
+	}
+
+
+	/**
+	 * Loads various admin functions
+	 *
+	 * - Checks for version update.
+	 * - Loads js/css scripts
+	 *
+	 * @uses Advanced_Term_Fields::load_admin_functions()
+	 *
+	 * @access public
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return void
+	 */
+	public function load_admin_functions()
+	{
+		parent::load_admin_functions();
+		add_action( 'admin_init', array( $this, 'check_for_update' ) );
+	}
+
+
+	/**
+	 * Loads upgrade check
+	 *
+	 * Checks if declared plugin version  matches the version stored in the database.
+	 *
+	 * @uses Adv_Term_Fields_Colors::$version
+	 * @uses Adv_Term_Fields_Colors::$db_version_key
+	 * @uses WordPress get_option()
+	 * @uses Adv_Term_Fields_Colors::upgrade_version()
+	 *
+	 *
+	 * @access public
+	 *
+	 * @since 0.1.1
+	 *
+	 * @return void
+	 */
+	public function check_for_update()
+	{
+		$db_version_key = $this->db_version_key;
+		$db_version = get_option( $db_version_key );
+		$plugin_version = $this->version;
+
+		do_action( "atf_pre_{$this->meta_key}_upgrade_check", $db_version_key, $db_version );
+
+		if( ! $db_version || version_compare( $db_version, $plugin_version, '<' ) ) {
+			$this->upgrade_version( $db_version_key, $plugin_version, $db_version, $this->meta_key );
+		}
+	}
+
+
+	/**
+	 * Upgrades database record of plugin version
+	 *
+	 * @uses WordPress update_option()
+	 *
+	 * @since 0.1.1
+	 *
+	 * @param string $db_version_key The database key for the plugin version.
+	 * @param string $plugin_version The most recent plugin version.
+	 * @param string $db_version     The plugin version stored in the database pre upgrade.
+	 * @param string $meta_key       The meta field key.
+	 *
+	 * @return bool $updated True if version has changed, false if not or if update failed.
+	 */
+	public function upgrade_version( $db_version_key, $plugin_version, $db_version = 0, $meta_key = '' )
+	{
+		do_action( "atf_pre_{$meta_key}_version_upgrade", $plugin_version, $db_version, $db_version_key );
+
+		$updated = update_option( $db_version_key, $plugin_version );
+
+		do_action( "atf_{$meta_key}_version_upgraded", $updated, $db_version_key, $plugin_version, $db_version, $meta_key );
+
+		return $updated;
 	}
 
 
@@ -151,14 +250,15 @@ final class Adv_Term_Fields_Colors extends Advanced_Term_Fields
 
 		wp_localize_script( 'atf-colors', 'l10n_ATF_colors', array(
 			'custom_column_name' => esc_html__( $this->custom_column_name ),
-			'meta_key'           => esc_html__( $this->meta_key ),
-			'data_type'          => esc_html__( $this->data_type ),
+			'meta_key'	         => esc_html__( $this->meta_key ),
+			'meta_slug'	         => esc_html__( $this->meta_slug ),
+			'data_type'	         => esc_html__( $this->data_type ),
 		) );
 	}
 
 
 	/**
-	 * Prints out css styles in admin head
+	 * Prints out CSS styles in admin head
 	 *
 	 * Note: Only loads on edit-tags.php
 	 *
@@ -195,8 +295,7 @@ final class Adv_Term_Fields_Colors extends Advanced_Term_Fields
 	public function custom_column_output( $meta_value )
 	{
 		$output = sprintf(
-			'<svg data-%1$s="%2$s" class="term-%1$s" width="25" height="25"> <title>%2$s</title> <circle cx="12" cy="12" r="12" fill="%2$s" /> %2$s </svg>',
-			$this->data_type,
+			'<i data-color="%1$s" class="term-color" title="%1$s" style="background-color:%1$s" />',
 			esc_attr( $meta_value )
 			);
 
@@ -212,6 +311,7 @@ final class Adv_Term_Fields_Colors extends Advanced_Term_Fields
 	 *
 	 * @uses Advanced_Term_Fields::$file To include view.
 	 * @uses Advanced_Term_Fields::$meta_key To populate field attributes.
+	 * @uses Advanced_Term_Fields::$meta_slug To populate CSS IDs, classes.
 	 *
 	 * @access public
 	 *
@@ -224,7 +324,7 @@ final class Adv_Term_Fields_Colors extends Advanced_Term_Fields
 	public function show_inner_field_add( $taxonomy = '' )
 	{
 		ob_start();
-		include dirname( $this->file ) . '/views/add-form-field.php';
+		include dirname( $this->file ) . '/views/inner-add-form-field.php';
 		$field = ob_get_contents();
 		ob_end_clean();
 
@@ -241,6 +341,7 @@ final class Adv_Term_Fields_Colors extends Advanced_Term_Fields
 	 * @uses Advanced_Term_Fields::$file To include view.
 	 * @uses Advanced_Term_Fields::$meta_key To populate field attributes.
 	 * @uses Advanced_Term_Fields::get_meta() To retrieve meta value.
+	 * @uses Advanced_Term_Fields::$meta_slug To populate CSS IDs, classes.
 	 *
 	 * @access public
 	 *
@@ -254,7 +355,7 @@ final class Adv_Term_Fields_Colors extends Advanced_Term_Fields
 	public function show_inner_field_edit( $term = false, $taxonomy = '' )
 	{
 		ob_start();
-		include dirname( $this->file ) . '/views/edit-form-field.php';
+		include dirname( $this->file ) . '/views/inner-edit-form-field.php';
 		$field = ob_get_contents();
 		ob_end_clean();
 
@@ -270,6 +371,7 @@ final class Adv_Term_Fields_Colors extends Advanced_Term_Fields
 	 *
 	 * @uses Advanced_Term_Fields::$file To include view.
 	 * @uses Advanced_Term_Fields::$meta_key To populate field attributes.
+	 * @uses Advanced_Term_Fields::$meta_slug To populate CSS IDs, classes.
 	 *
 	 * @access public
 	 *
@@ -284,7 +386,7 @@ final class Adv_Term_Fields_Colors extends Advanced_Term_Fields
 	public function show_inner_field_qedit( $column_name = '' , $screen = '' , $taxonomy = '' )
 	{
 		ob_start();
-		include dirname( $this->file ) . '/views/quick-form-field.php';
+		include dirname( $this->file ) . '/views/inner-quick-form-field.php';
 		$field = ob_get_contents();
 		ob_end_clean();
 
@@ -293,11 +395,13 @@ final class Adv_Term_Fields_Colors extends Advanced_Term_Fields
 
 
 	/**
-	 * Make sure we have valid hex color
+	 * Validates submitted meta value
+	 *
+	 * Makes sure it's a valid hex color code.
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param string $data The expected hex color code
+	 * @param string $data The expected hex color code.
 	 *
 	 * @return string $data The sanitized meta value.
 	 */
@@ -312,11 +416,11 @@ final class Adv_Term_Fields_Colors extends Advanced_Term_Fields
 	 *
 	 * @since 0.1.0
 	 *
-	 * @see WP_Term_Toolbox::sortable_columns()
+	 * @see Advanced_Term_Fields::sortable_columns()
 	 *
 	 * @param array $columns The columns of the Tag List table
 	 */
-	public function sortable_columns2( $columns = array() )
+	public function sortable_columns( $columns = array() )
 	{
 		return $columns;
 	}

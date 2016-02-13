@@ -1,3 +1,4 @@
 <style type="text/css">
-	.column-col-term_color { width: 70px; }
+	.column-col-term-color { width: 70px; }
+	i.term-color { border-radius: 100%; display: inline-block; height: 22px; line-height: 22px; width: 22px; }
 </style>

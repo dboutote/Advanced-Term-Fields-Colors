@@ -13,7 +13,7 @@
 	 */
 	function atfResetTagFormColors( form ) {
 		$('.wp-color-result', form).css({'background-color': 'transparent'});
-		$( '#' + l10n_ATF_colors.meta_key, form ).val('');
+		$( '#' + l10n_ATF_colors.meta_slug, form ).val('');
 	};
 
 
@@ -21,7 +21,7 @@
 	 * Instantiate the color picker
 	 */
 	if ( typeof jQuery.wp === 'object' && typeof jQuery.wp.wpColorPicker === 'function' ) {
-		$( '#' + l10n_ATF_colors.meta_key ).wpColorPicker();
+		$( '#' + l10n_ATF_colors.meta_slug ).wpColorPicker();
 	}
 
 
@@ -30,7 +30,7 @@
 	 */
 	$('#the-list').on('click', '.editinline', function () {
 		var tr_id = $(this).parents('tr').attr('id');
-		var meta_value = $('td.' + l10n_ATF_colors.custom_column_name + ' svg', '#' + tr_id).attr('data-' + l10n_ATF_colors.data_type);
+		var meta_value = $('td.' + l10n_ATF_colors.custom_column_name + ' i', '#' + tr_id).attr('data-' + l10n_ATF_colors.data_type);
 
 		$(':input[name="' + l10n_ATF_colors.meta_key + '"]', '.inline-edit-row').val(meta_value);
 	});
