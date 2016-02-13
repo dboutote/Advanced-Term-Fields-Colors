@@ -64,7 +64,7 @@ class Adv_Term_Fields_Colors extends Advanced_Term_Fields
 	 * @see Adv_Term_Fields_Colors::enqueue_admin_scripts()
 	 * @see Adv_Term_Fields_Colors\Views\(add|edit|qedit).php
 	 *
-	 * @since 0.1.0
+	 * @since 0.1.2
 	 *
 	 * @var string
 	 */
@@ -140,7 +140,7 @@ class Adv_Term_Fields_Colors extends Advanced_Term_Fields
 	 *
 	 * @access public
 	 *
-	 * @since 0.1.0
+	 * @since 0.1.2
 	 *
 	 * @return void
 	 */
@@ -164,7 +164,7 @@ class Adv_Term_Fields_Colors extends Advanced_Term_Fields
 	 *
 	 * @access public
 	 *
-	 * @since 0.1.1
+	 * @since 0.1.2
 	 *
 	 * @return void
 	 */
@@ -187,7 +187,7 @@ class Adv_Term_Fields_Colors extends Advanced_Term_Fields
 	 *
 	 * @uses WordPress update_option()
 	 *
-	 * @since 0.1.1
+	 * @since 0.1.2
 	 *
 	 * @param string $db_version_key The database key for the plugin version.
 	 * @param string $plugin_version The most recent plugin version.
